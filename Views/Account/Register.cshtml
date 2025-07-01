@@ -1,0 +1,162 @@
+﻿@model RegisterViewModel
+
+@{
+    ViewData["Title"] = "Sign Up";
+}
+
+<!-- FontAwesome for icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+
+<style>
+    .form-group {
+        position: relative;
+        margin-bottom: 1.5rem;
+    }
+
+    .floating-input {
+        border: 1px solid #ced4da;
+        border-radius: .5rem;
+        padding: 1rem .75rem .375rem 2.5rem;
+        font-size: 1rem;
+        width: 100%;
+        background-color: #fff;
+        transition: all 0.3s;
+    }
+
+    .floating-input:focus {
+        border-color: #0d6efd;
+        box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.2);
+        outline: none;
+    }
+
+    .floating-label {
+        position: absolute;
+        top: 50%;
+        left: 2.5rem;
+        transform: translateY(-50%);
+        transition: all 0.2s ease;
+        color: #6c757d;
+        font-size: 0.9rem;
+        background-color: white;
+        padding: 0 .25rem;
+        pointer-events: none;
+    }
+
+    .floating-input:focus + .floating-label,
+    .floating-input:not(:placeholder-shown) + .floating-label {
+        top: 0.35rem;
+        font-size: 0.75rem;
+        color: #0d6efd;
+    }
+
+    .input-icon {
+        position: absolute;
+        top: 50%;
+        left: 0.75rem;
+        transform: translateY(-50%);
+        color: #6c757d;
+        font-size: 1rem;
+    }
+
+    .btn-primary {
+        padding: .6rem;
+        font-size: 1rem;
+        border-radius: .5rem;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-primary:hover {
+        background-color: #0b5ed7;
+        box-shadow: 0 8px 18px rgba(13, 110, 253, 0.4);
+    }
+
+    a.fw-medium:hover {
+        color: #0b5ed7;
+        text-decoration: underline;
+    }
+
+    .card {
+        transition: all 0.3s ease;
+        border-radius: 1.25rem !important;
+    }
+
+    .card:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<div class="container-fluid min-vh-100 d-flex align-items-center justify-content-center bg-light px-2">
+    <div class="card shadow-sm border-0 overflow-hidden" style="max-width: 750px; width: 100%;">
+        <div class="row g-0">
+            <!-- Left Column: Illustration -->
+            <div class="col-md-5 d-none d-md-flex bg-primary text-white align-items-center justify-content-center flex-column p-3">
+                <h5 class="fw-bold mb-2 text-center">Welcome to MatchTracker</h5>
+                <img src="https://cdn-icons-png.flaticon.com/512/1042/1042339.png" alt="signup" class="img-fluid" style="max-height: 140px;">
+            </div>
+
+            <!-- Right Column: Form -->
+            <div class="col-md-7 bg-white p-4">
+                <h5 class="fw-bold text-primary mb-3 text-center">Create Account</h5>
+
+                <form asp-action="SaveRegister" autocomplete="on" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger small"></div>
+
+                    <!-- User Name -->
+                    <div class="form-group">
+                        <i class="fa fa-user input-icon"></i>
+                        <input asp-for="UserName" class="floating-input" placeholder=" " />
+                        <label class="floating-label">User Name</label>
+                        <span asp-validation-for="UserName" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <i class="fa fa-envelope input-icon"></i>
+                        <input asp-for="Email" class="floating-input" placeholder=" " />
+                        <label class="floating-label">Email Address</label>
+                        <span asp-validation-for="Email" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <i class="fa fa-lock input-icon"></i>
+                        <input asp-for="Password" class="floating-input" type="password" placeholder=" " />
+                        <label class="floating-label">Password</label>
+                        <span asp-validation-for="Password" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form-group">
+                        <i class="fa fa-lock input-icon"></i>
+                        <input asp-for="ConfirmPassword" class="floating-input" type="password" placeholder=" " />
+                        <label class="floating-label">Confirm Password</label>
+                        <span asp-validation-for="ConfirmPassword" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Phone Number -->
+                    <div class="form-group">
+                        <i class="fa fa-phone input-icon"></i>
+                        <input asp-for="PhoneNumber" class="floating-input" placeholder=" " />
+                        <label class="floating-label">Phone Number</label>
+                        <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                    </div>
+
+                    <!-- Submit -->
+                    <button type="submit" class="btn btn-primary w-100 fw-semibold">
+                        Sign Up
+                    </button>
+
+                    <div class="text-center mt-2 small">
+                        Already have an account?
+                        <a asp-action="Login" class="text-decoration-none fw-medium">Login</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

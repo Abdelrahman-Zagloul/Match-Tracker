@@ -1,0 +1,85 @@
+﻿@using System.Security.Claims
+@{
+    ViewData["Title"] = "User Management";
+}
+
+<h2 class="text-center my-4 text-primary fw-bold">
+    <i class="bi bi-person-gear me-2"></i> User Management
+</h2>
+
+<div class="container" style="min-height: 100vh;">
+    <div class="row g-4 justify-content-center">
+
+        <div class="col-md-4">
+            <a asp-action="Add" class="text-decoration-none">
+                <div class="card shadow-sm text-center border-0 dashboard-card h-100">
+                    <div class="card-body">
+                        <i class="bi bi-person-plus-fill fs-1 text-success"></i>
+                        <h5 class="card-title mt-3">Add New User</h5>
+                        <p class="text-muted">Create a new user account</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a asp-action="GetAllUser" class="text-decoration-none">
+                <div class="card shadow-sm text-center border-0 dashboard-card h-100">
+                    <div class="card-body">
+                        <i class="bi bi-people-fill fs-1 text-primary"></i>
+                        <h5 class="card-title mt-3">All Users</h5>
+                        <p class="text-muted">View and manage all users</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a asp-action="Profile" class="text-decoration-none">
+                <div class="card shadow-sm text-center border-0 dashboard-card h-100">
+                    <div class="card-body">
+                        <i class="bi bi-person-badge-fill fs-1 text-warning"></i>
+                        <h5 class="card-title mt-3">Update Profile</h5>
+                        <p class="text-muted">Edit your profile details</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a asp-action="ChangePassword" asp-route-id="@User.FindFirstValue(ClaimTypes.NameIdentifier)" class="text-decoration-none">
+                <div class="card shadow-sm text-center border-0 dashboard-card h-100">
+                    <div class="card-body">
+                        <i class="bi bi-key-fill fs-1 text-danger"></i>
+                        <h5 class="card-title mt-3">Change Password</h5>
+                        <p class="text-muted">Update your account password</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-md-4">
+            <a asp-action="Dashboard" class="text-decoration-none">
+                <div class="card shadow-sm text-center border-0 dashboard-card h-100">
+                    <div class="card-body">
+                        <i class="bi bi-arrow-left-circle-fill fs-1 text-secondary"></i>
+                        <h5 class="card-title mt-3">Back to Dashboard</h5>
+                        <p class="text-muted">Return to main admin dashboard</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .dashboard-card {
+        transition: all 0.3s ease;
+        border-radius: 1rem;
+    }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+</style>

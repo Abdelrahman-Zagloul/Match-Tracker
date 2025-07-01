@@ -1,0 +1,40 @@
+﻿INSERT INTO Stadiums (Name, Location, Capacity, TeamId) VALUES
+('Santiago Bernabéu', 'Madrid, Spain', 81044, 1), -- Real Madrid
+('Spotify Camp Nou', 'Barcelona, Spain', 99800, 2), -- FC Barcelona
+('Old Trafford', 'Manchester, England', 74310, 3), -- Manchester United
+('Anfield', 'Liverpool, England', 61000, 4), -- Liverpool FC
+('Allianz Arena', 'Munich, Germany', 75000, 5), -- Bayern Munich
+('San Siro', 'Milan, Italy', 80018, 6), -- AC Milan (shared with Inter Milan)
+('Allianz Stadium', 'Turin, Italy', 41507, 7), -- Juventus
+('Emirates Stadium', 'London, England', 60704, 9), -- Arsenal FC
+('Stamford Bridge', 'London, England', 41631, 10), -- Chelsea FC
+('Etihad Stadium', 'Manchester, England', 53400, 11), -- Manchester City
+('Parc des Princes', 'Paris, France', 47929, 12), -- Paris Saint-Germain
+('Wanda Metropolitano', 'Madrid, Spain', 68456, 13), -- Atletico Madrid
+('Signal Iduna Park', 'Dortmund, Germany', 81365, 14), -- Borussia Dortmund
+('Johan Cruyff Arena', 'Amsterdam, Netherlands', 55865, 15), -- Ajax
+('Estádio da Luz', 'Lisbon, Portugal', 64642, 16), -- Benfica
+('Estádio do Dragão', 'Porto, Portugal', 50033, 17), -- Porto
+('Estádio José Alvalade', 'Lisbon, Portugal', 50095, 18), -- Sporting CP
+('RAMS Park', 'Istanbul, Turkey', 52223, 19), -- Galatasaray
+('Ülker Stadyumu', 'Istanbul, Turkey', 47834, 20), -- Fenerbahce
+('Mâs Monumental', 'Buenos Aires, Argentina', 83196, 21), -- River Plate
+('La Bombonera', 'Buenos Aires, Argentina', 54000, 22), -- Boca Juniors
+('Maracanã', 'Rio de Janeiro, Brazil', 73000, 23), -- Flamengo
+('Allianz Parque', 'São Paulo, Brazil', 43713, 24), -- Palmeiras
+('Morumbi', 'São Paulo, Brazil', 66795, 25), -- Sao Paulo FC
+('Neo Química Arena', 'São Paulo, Brazil', 49205, 26), -- Corinthians
+('Estadio Azteca', 'Mexico City, Mexico', 87523, 27), -- Club America
+('Estadio Akron', 'Zapopan, Mexico', 49850, 28), -- Chivas Guadalajara
+('Celtic Park', 'Glasgow, Scotland', 60411, 29), -- Celtic FC
+('Ibrox Stadium', 'Glasgow, Scotland', 50817, 30), -- Rangers FC
+('Constant Vanden Stock', 'Anderlecht, Belgium', 28000, 31), -- Anderlecht
+('Philips Stadion', 'Eindhoven, Netherlands', 35000, 32), -- PSV Eindhoven
+('BayArena', 'Leverkusen, Germany', 30210, 33), -- Bayer Leverkusen
+('Stadio Diego Armando Maradona', 'Naples, Italy', 54726, 34), -- Napoli
+('Stadio Olimpico', 'Rome, Italy', 70634, 35), -- AS Roma
+('Gewiss Stadium', 'Bergamo, Italy', 21300, 36), -- Atalanta
+('Tottenham Hotspur Stadium', 'London, England', 62850, 37), -- Tottenham Hotspur
+('Villa Park', 'Birmingham, England', 42640, 38), -- Aston Villa
+('Dignity Health Sports Park', 'Carson, USA', 27000, 39), -- LA Galaxy
+('Chase Stadium', 'Fort Lauderdale, USA', 21550, 40); -- Inter Miami

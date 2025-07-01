@@ -1,0 +1,217 @@
+﻿@model Match
+
+@{
+    ViewData["Title"] = "Match Details";
+    var matchDateTimeString = Model.MatchDate.ToString("yyyy-MM-ddTHH:mm:ss");
+}
+
+<style>
+    .match-detail-card {
+        background-color: #fff;
+        border-radius: 1rem;
+        padding: 40px;
+        box-shadow: 0 5px 25px rgba(0,0,0,0.1);
+    }
+
+    .team-logo {
+        width: 100px;
+        height: 100px;
+        object-fit: contain;
+        display: block;
+        margin: 0 auto;
+    }
+
+    .team-name {
+        font-size: 1.4rem;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 10px;
+        color: #0d6efd;
+    }
+
+    .vs-text {
+        font-size: 2rem;
+        font-weight: bold;
+        margin: 0 40px;
+        color: #6c757d;
+    }
+
+    .team-section {
+        flex: 1;
+        min-width: 280px;
+        background-color: #f8f9fa;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    }
+
+    .player-table {
+        margin-top: 1rem;
+        width: 100%;
+    }
+
+        .player-table th, .player-table td {
+            text-align: center;
+            font-size: 0.95rem;
+            padding: 8px;
+        }
+
+    .countdown-box {
+        background: #e7f1ff;
+        border: 1px solid #b6d4fe;
+        border-radius: 8px;
+        padding: 10px 20px;
+        display: inline-block;
+        font-weight: bold;
+        color: #0d6efd;
+        margin-bottom: 10px;
+    }
+
+
+    .vs-text {
+        margin: 20px 0;
+    }
+
+    .team-section {
+        flex: 1;
+        min-width: 280px;
+        background-color: #f8f9fa;
+        border-radius: 12px;
+        padding: 20px;
+        box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        transition: all 0.3s ease-in-out;
+    }
+
+        .team-section:hover {
+            box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+            transform: translateY(-4px);
+            background-color: #e9f2ff;
+            cursor: pointer;
+        }
+
+</style>
+<div class="container py-5 mb-5">
+    <div class="match-detail-card">
+
+        <h2 class="mb-4 text-primary text-center">⚽ Match Details</h2>
+
+        <div class="mb-4 text-center">
+            <div id="countdown" class="countdown-box">Loading...</div>
+            <div class="text-muted">@Model.MatchDate.ToString("dddd, dd MMM yyyy")</div>
+            <div class="fw-bold fs-4 text-dark">@Model.MatchDate.ToString("hh:mm tt")</div>
+            <div class="mt-2">
+                <i class="bi bi-geo-alt-fill text-danger me-1"></i>
+                <span class="fw-medium">@Model.StadiumName</span>
+            </div>
+            <div class="text-muted">@Model.Location</div>
+        </div>
+
+        <hr />
+
+        <div class="d-flex justify-content-center align-items-start gap-4 team-layout flex-wrap">
+
+            <!-- الفريق المضيف -->
+            <a asp-controller="Team" asp-action="SearchByName" asp-route-teamName="@Model.HomeTeam.Name"
+               class="text-decoration-none text-dark" style="flex: 1; min-width: 280px;">
+                <div class="team-section">
+                    <img src="/@FileSetting.TeamImagesFolderPath/@Model.HomeTeam.LogoPath" class="team-logo" />
+                    <div class="team-name">@Model.HomeTeam.Name</div>
+                    <table class="table table-bordered table-sm player-table">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Player</th>
+                                <th>Position</th>
+                                <th>Nationality</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in Model.HomeTeam.Players)
+                            {
+                                <tr>
+                                    <td>@p.Name</td>
+                                    <td>@p.Position</td>
+                                    <td>@p.Nationality</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </a>
+
+            <div class="vs-text align-self-center">VS</div>
+
+            <!-- الفريق الضيف -->
+            <a asp-controller="Team" asp-action="SearchByName" asp-route-teamName="@Model.AwayTeam.Name"
+               class="text-decoration-none text-dark" style="flex: 1; min-width: 280px;">
+                <div class="team-section">
+                    <img src="/@FileSetting.TeamImagesFolderPath/@Model.AwayTeam.LogoPath" class="team-logo" />
+                    <div class="team-name">@Model.AwayTeam.Name</div>
+                    <table class="table table-bordered table-sm player-table">
+                        <thead class="table-light">
+                            <tr>
+                                <th>Player</th>
+                                <th>Position</th>
+                                <th>Nationality</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var p in Model.AwayTeam.Players)
+                            {
+                                <tr>
+                                    <td>@p.Name</td>
+                                    <td>@p.Position</td>
+                                    <td>@p.Nationality</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </a>
+
+        </div>
+
+
+        <div class="mt-4 text-center">
+            <a asp-action="Index" class="btn btn-outline-secondary">
+                <i class="bi bi-arrow-left"></i> Back to List
+            </a>
+            @if (User.IsInRole("Admin"))
+            {
+                <a asp-action="Update" asp-route-id="@Model.Id" class="btn btn-outline-warning me-2">
+                    <i class="bi bi-pencil-square"></i> Edit
+                </a>
+            }
+           
+        </div>
+
+    </div>
+</div>
+
+<script>
+    const countdownElement = document.getElementById("countdown");
+    const matchDateTime = new Date("@matchDateTimeString");
+
+    function updateCountdown() {
+        const now = new Date();
+        const timeDiff = matchDateTime - now;
+
+        if (timeDiff <= 0) {
+            countdownElement.innerHTML = "⏱ Match Started!";
+            countdownElement.classList.remove("countdown-box");
+            countdownElement.classList.add("text-danger", "fw-bold");
+            clearInterval(intervalId);
+            return;
+        }
+
+        const days = Math.floor(timeDiff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((timeDiff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((timeDiff / (1000 * 60)) % 60);
+        const seconds = Math.floor((timeDiff / 1000) % 60);
+
+        countdownElement.innerHTML =
+            `⏳ ${days}d : ${hours}h : ${minutes}m : ${seconds}s`;
+    }
+
+    const intervalId = setInterval(updateCountdown, 1000);
+    updateCountdown();
+</script>

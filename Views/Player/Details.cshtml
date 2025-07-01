@@ -1,0 +1,114 @@
+﻿@model Player
+
+@{
+    ViewData["Title"] = "Player Details";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="card shadow-lg rounded-4 overflow-hidden border-0">
+        <div class="card-header bg-primary bg-gradient text-white text-center py-4">
+            <h3 class="mb-0">
+                <i class="bi bi-person-fill me-2"></i> @Model.Name
+            </h3>
+            <small class="fst-italic">Player Information Overview</small>
+        </div>
+
+        <div class="card-body px-5 py-4">
+            <div class="row mb-4 align-items-center">
+                <!-- Player Info -->
+                <div class="col-md-8">
+                    <div class="row mb-2">
+                        <div class="col-sm-5 fw-bold text-secondary">Nationality:</div>
+                        <div class="col-sm-7">@Model.Nationality</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-5 fw-bold text-secondary">Number:</div>
+                        <div class="col-sm-7">@Model.Number</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-5 fw-bold text-secondary">Position:</div>
+                        <div class="col-sm-7">@Model.Position</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-5 fw-bold text-secondary">Age:</div>
+                        <div class="col-sm-7">@Model.Age</div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-5 fw-bold text-secondary">Matches Played:</div>
+                        <div class="col-sm-7">
+                            <span class="badge bg-info text-dark px-3">@Model.MatchesPlayed</span>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-5 fw-bold text-secondary">Assists:</div>
+                        <div class="col-sm-7">
+                            <span class="badge bg-success px-3">@Model.Assists</span>
+                        </div>
+                    </div>
+                    <div class="row mb-2">
+                        <div class="col-sm-5 fw-bold text-secondary">Goals:</div>
+                        <div class="col-sm-7">
+                            <span class="badge bg-warning text-dark px-3">@Model.GoalsScored</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Player Image -->
+                <div class="col-md-4 text-center">
+                    @if (!string.IsNullOrEmpty(Model.PicturePath))
+                    {
+                        <img src="/@FileSetting.PlayerImagesFolderPath/@Model.PicturePath"
+                             alt="Player Image"
+                             class="rounded-circle border border-3 border-primary shadow"
+                             style="width: 200px; height: 200px; object-fit: cover;" />
+                    }
+                    else
+                    {
+                        <img src="/@FileSetting.DefaultImagePath"
+                             alt="Player Image"
+                             class="rounded-circle border border-3 border-primary shadow"
+                             style="width: 200px; height: 200px; object-fit: cover;" />
+                    }
+                    <p class="text-muted mt-2">Player Image</p>
+                </div>
+
+            </div>
+
+            <hr class="my-4" />
+
+            <!-- Team Info -->
+            <h5 class="text-primary mb-3">
+                <i class="bi bi-shield-fill-check me-2"></i> Team Information
+            </h5>
+
+            <div class="row align-items-center">
+                <div class="col-md-8">
+                    <p><strong>Team:</strong> @Model.Team?.Name</p>
+                    <p><strong>Coach:</strong> @Model.Team?.CoachName</p>
+                </div>
+                <div class="col-md-4 text-center">
+                    @if (!string.IsNullOrEmpty(Model.Team?.LogoPath))
+                    {
+                        <img src="/@FileSetting.TeamImagesFolderPath/@Model.Team.LogoPath"
+                             alt="Team Logo"
+                             class="img-thumbnail rounded shadow-sm"
+                             style="width: 150px; height: 150px; object-fit: contain;" />
+                        <p class="text-muted mt-2">Team Logo</p>
+                    }
+                    else
+                    {
+                        <span class="text-muted">No Logo Found</span>
+                    }
+                </div>
+            </div>
+        </div>
+
+        <div class="card-footer bg-light text-center py-3">
+            <a asp-action="Index" asp-controller="Player"
+               class="btn btn-outline-secondary px-4 rounded-pill">
+                <i class="bi bi-arrow-left-circle me-2"></i> Back to List
+            </a>
+        </div>
+
+    </div>
+</div>

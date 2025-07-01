@@ -1,0 +1,83 @@
+﻿@model MatchForAddViewModel
+
+@{
+    ViewData["Title"] = "Add Match";
+}
+
+<div class="container mt-5 py-5" style="height: 100vh;">
+    <div class="row justify-content-center">
+        <div class="col-lg-8 col-md-10">
+            <div class="card border-0 shadow-lg rounded-4 overflow-hidden">
+                <div class="card-header bg-gradient bg-primary text-white text-center py-3">
+                    <h2 class="mb-0">⚽ Add New Match</h2>
+                </div>
+                <div class="card-body p-4 bg-light">
+                    <form asp-action="SaveAdd" class="needs-validation" novalidate>
+                        <div asp-validation-summary="ModelOnly" class="alert alert-danger" role="alert"></div>
+
+                        <div class="mb-3">
+                            <label asp-for="MatchDate" class="form-label fw-semibold">Match Date</label>
+                            <input asp-for="MatchDate" class="form-control shadow-sm" id="matchDateInput"
+                                   value="@DateTime.Now.ToString("yyyy-MM-ddTHH:mm")" />
+                            <span asp-validation-for="MatchDate" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-3">
+                            <label asp-for="HomeTeamId" class="form-label fw-semibold">Home Team</label>
+                            <select asp-for="HomeTeamId" class="form-select select2 shadow-sm" asp-items="Model.Teams">
+                                <option value="">-- Select Home Team --</option>
+                            </select>
+                            <span asp-validation-for="HomeTeamId" class="text-danger small"></span>
+                        </div>
+
+                        <div class="mb-4">
+                            <label asp-for="AwayTeamId" class="form-label fw-semibold">Away Team</label>
+                            <select asp-for="AwayTeamId" class="form-select select2 shadow-sm" asp-items="Model.Teams">
+                                <option value="">-- Select Away Team --</option>
+                            </select>
+                            <span asp-validation-for="AwayTeamId" class="text-danger small"></span>
+                        </div>
+
+                        <div class="d-flex justify-content-between align-items-center">
+                            <a asp-action="Index" class="btn btn-outline-secondary px-4">
+                                <i class="bi bi-arrow-left me-1"></i> Back
+                            </a>
+                            <button type="submit" class="btn btn-success px-4">
+                                <i class="bi bi-plus-circle me-1"></i> Add Match
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet" />
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+    <script>
+        flatpickr("#matchDateInput", {
+            enableTime: true,
+            dateFormat: "Y-m-d H:i",
+            altInput: true,
+            altFormat: "F j, Y - h:i K",
+            defaultDate: "today"
+        });
+
+        $(document).ready(function () {
+            $('.select2').select2({
+                placeholder: "Select a team",
+                allowClear: true,
+                width: '100%'
+            });
+        });
+    </script>
+}

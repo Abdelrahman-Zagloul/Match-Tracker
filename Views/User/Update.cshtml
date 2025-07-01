@@ -1,0 +1,144 @@
+﻿@model AccountForUpdateViewModel
+
+@{
+    ViewData["Title"] = "Update Profile";
+}
+
+<style>
+    .card-custom {
+        background: linear-gradient(to right, #fdfbfb, #ebedee);
+        border-radius: 1rem;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .image-container {
+        background-color: #f8f9fa;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+    }
+
+    .preview-img {
+        width: 160px;
+        height: 160px;
+        object-fit: cover;
+        border-radius: 50%;
+        border: 3px solid #dee2e6;
+    }
+
+    .form-section {
+        padding: 2rem;
+    }
+
+    .form-label {
+        font-weight: 600;
+        color: #444;
+    }
+
+    .form-control, .form-select {
+        border-radius: 0.5rem;
+    }
+
+        .form-control:focus, .form-select:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+        }
+</style>
+
+<div class="container mt-5" style=" height: 100vh;">
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card card-custom">
+                <div class="row g-0">
+                    <!-- Left: Form -->
+                    <div class="col-md-8 form-section bg-white">
+                        <h4 class="text-primary mb-3">Edit Profile</h4>
+                        <form asp-action="SaveUpdate" asp-route-Id="@Model.Id" enctype="multipart/form-data">
+                            <div asp-validation-summary="ModelOnly" class="alert alert-danger small"></div>
+
+                            <input type="hidden" asp-for="Id" />
+
+                            <div class="mb-3">
+                                <label asp-for="UserName" class="form-label">User Name</label>
+                                <input asp-for="UserName" class="form-control" />
+                                <span asp-validation-for="UserName" class="text-danger small"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Email" class="form-label">Email</label>
+                                <input asp-for="Email" class="form-control" readonly />
+                                <span asp-validation-for="Email" class="text-danger small"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="PhoneNumber" class="form-label">Phone Number</label>
+                                <input asp-for="PhoneNumber" class="form-control" />
+                                <span asp-validation-for="PhoneNumber" class="text-danger small"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="ImageFile" class="form-label">Change Image</label>
+                                <input type="file" asp-for="ImageFile" class="form-control"
+                                       onchange="previewImage(event)" />
+                                <span asp-validation-for="ImageFile" class="text-danger small"></span>
+                            </div>
+
+                            <div class="mb-3">
+                                <label asp-for="Role" class="form-label">Role</label>
+                                <input asp-for="Role" class="form-control" readonly />
+                                <span asp-validation-for="Role" class="text-danger small"></span>
+                            </div>
+
+                            <div class="d-flex justify-content-between">
+                                <a asp-action="Profile" class="btn btn-outline-secondary">
+                                    <i class="bi bi-arrow-left"></i> Back
+                                </a>
+                                <button type="submit" class="btn btn-outline-warning text-black">
+                                    <i class="bi bi-save"></i> Save Changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Right: Image -->
+                    <div class="col-md-4 image-container">
+                        @if (Model.ImagePath == FileSetting.DefaultImagePath)
+                        {
+                            <img id="preview" src="/@FileSetting.DefaultImagePath" class="preview-img" />
+                        }
+                        else
+                        {
+                            <img id="preview" src="/@FileSetting.UserImagesFolderPath/@Model.ImagePath" class="preview-img" />
+                        }
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/CheckImageTypes.js"></script>
+    <script>
+        function previewImage(event) {
+            const input = event.target;
+            const preview = document.getElementById('preview');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                };
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+
+
+
+}

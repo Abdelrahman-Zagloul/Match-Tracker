@@ -1,0 +1,63 @@
+﻿@model List<Player>
+
+@{
+    ViewData["Title"] = "Search By Country";
+}
+
+<div class="container mt-5 mb-5">
+    <div class="card shadow-sm">
+        <div class="card-body">
+            <h3 class="text-primary text-center mb-4">
+                <i class="bi bi-flag"></i> Search by Country
+            </h3>
+
+            <div class="alert alert-info text-center fw-semibold rounded-pill shadow-sm">
+                <i class="bi bi-person-fill"></i>
+                Number of Players from this country: <span class="text-dark">@Model.Count</span>
+            </div>
+
+            @if (Model != null && Model.Any())
+            {
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover text-center align-middle shadow-sm rounded-3 overflow-hidden">
+                        <thead class="table-dark">
+                            <tr>
+                                <th>Name</th>
+                                <th>Matches Played</th>
+                                <th>Goals Scored</th>
+                                <th>Assists</th>
+                                <th>Position</th>
+                                <th>Team Name</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td class="fw-semibold">@item.Name</td>
+                                    <td>@item.MatchesPlayed</td>
+                                    <td><span class="badge bg-success">@item.GoalsScored</span></td>
+                                    <td><span class="badge bg-warning text-dark">@item.Assists</span></td>
+                                    <td><span class="badge bg-primary">@item.Position</span></td>
+                                    <td>@item.Team?.Name</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            }
+            else
+            {
+                <div class="alert alert-warning text-center rounded shadow-sm">
+                    <i class="bi bi-exclamation-triangle-fill me-1"></i> No players found from this country.
+                </div>
+            }
+
+            <div class="text-center mt-4">
+                <a asp-action="Index" asp-controller="Player" class="btn btn-outline-primary btn-rounded">
+                    <i class="bi bi-arrow-left-circle me-1"></i> Back to List
+                </a>
+            </div>
+        </div>
+    </div>
+</div>

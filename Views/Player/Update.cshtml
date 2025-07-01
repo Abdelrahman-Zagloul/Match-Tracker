@@ -1,0 +1,164 @@
+﻿@model PlayerForUpdateViewModel
+
+@{
+    ViewData["Title"] = "Update Player";
+}
+
+<style>
+    .form-label {
+        font-weight: 600;
+        color: #444;
+    }
+
+    .form-control, .form-select {
+        border-radius: 0.5rem;
+    }
+
+    .img-preview {
+        width: 180px;
+        height: 240px;
+        object-fit: cover;
+        border-radius: 0.75rem;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<div class="container mt-4" style=" height: 100vh;">
+    <div class="card shadow-sm">
+        <div class="row g-0">
+            <!-- Left Side: Form -->
+            <div class="col-md-7 p-4">
+                <h3 class="text-warning fw-bold mb-3">✏️ Update Player Info</h3>
+                <form asp-action="SaveUpdate" enctype="multipart/form-data" asp-route-id="@Model.Id">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger small"></div>
+
+                    <!-- Text Inputs -->
+                    <div class="row g-2">
+                        <div class="col-md-6">
+                            <label asp-for="Name" class="form-label">Name</label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Nationality" class="form-label">Nationality</label>
+                            <input asp-for="Nationality" class="form-control" />
+                            <span asp-validation-for="Nationality" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="Number" class="form-label">Number</label>
+                            <input asp-for="Number" class="form-control" />
+                            <span asp-validation-for="Number" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Age" class="form-label">Age</label>
+                            <input asp-for="Age" class="form-control" />
+                            <span asp-validation-for="Age" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="GoalsScored" class="form-label">Goals Scored</label>
+                            <input asp-for="GoalsScored" class="form-control" />
+                            <span asp-validation-for="GoalsScored" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Assists" class="form-label">Assists</label>
+                            <input asp-for="Assists" class="form-control" />
+                            <span asp-validation-for="Assists" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="MatchesPlayed" class="form-label">Matches Played</label>
+                            <input asp-for="MatchesPlayed" class="form-control" />
+                            <span asp-validation-for="MatchesPlayed" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Selects -->
+                        <div class="col-md-6">
+                            <label asp-for="Position" class="form-label">Position</label>
+                            <select asp-for="Position" asp-items="@Model.Positions" class="form-select">
+                                <option value="">-- Select Position --</option>
+                            </select>
+                            <span asp-validation-for="Position" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label asp-for="TeamId" class="form-label">Team</label>
+                            <select asp-for="TeamId" asp-items="@Model.Teams" class="form-select">
+                                <option value="">-- Select Team --</option>
+                            </select>
+                            <span asp-validation-for="TeamId" class="text-danger small"></span>
+                        </div>
+
+                        <!-- Picture Upload -->
+                        <div class="col-md-12">
+                            <label asp-for="ImageFile" class="form-label">Change Picture</label>
+                            <input asp-for="ImageFile" type="file" class="form-control"
+                                   onchange="previewPicture(event)" />
+                            <span asp-validation-for="ImageFile" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="d-flex justify-content-between mt-4">
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left"></i> Back to List
+                        </a>
+                        <button type="submit" class="btn btn-warning text-white">
+                            <i class="bi bi-save"></i> Save Changes
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right Side: Images -->
+            <div class="col-md-5 bg-light d-flex flex-column justify-content-center align-items-center p-4">
+                <div class="text-center mb-3">
+                    <p class="text-muted mb-1">Current Picture</p>
+                    @if (!string.IsNullOrEmpty(Model.PicturePath))
+                    {
+                        <img src="/@FileSetting.PlayerImagesFolderPath/@Model.PicturePath"
+                        class="img-preview" alt="Current Picture" id="currentImage" />
+                    }
+                    else
+                    {
+                        <img src="/@FileSetting.DefaultImagePath"
+                             class="img-preview" alt="Current Picture" id="currentImage" />
+                    }
+                </div>
+                <div class="text-center">
+                    <p class="text-muted mb-1">New Preview</p>
+                    <img id="PicturePreview" src="#" alt="Preview"
+                         class="img-preview" style="display: none;" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/CheckImageTypes.js"></script>
+    <script>
+        function previewPicture(event) {
+            const input = event.target;
+            const preview = document.getElementById('PicturePreview');
+            const current = document.getElementById('currentImage');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    if (current) current.style.display = 'none';
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.src = '#';
+                preview.style.display = 'none';
+                if (current) current.style.display = 'block';
+            }
+        }
+    </script>
+}

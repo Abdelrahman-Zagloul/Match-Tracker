@@ -1,0 +1,108 @@
+wwwroot\assets\Images\Default.webp
+wwwroot\assets\Images\Teams\101a3fc7-a0ad-4ae4-8455-341f9a8678c0_River Plate.png
+wwwroot\assets\Images\Teams\11f7f16b-114a-4bc5-8d15-9d92f7849b00_download (12).jpeg
+wwwroot\assets\Images\Teams\144a3fe2-6d03-4fc7-9292-be69b14631f0_PSV Eindhoven.png
+wwwroot\assets\Images\Teams\17336fb4-e744-46cd-a166-e1c84ca523c4_Porto.png
+wwwroot\assets\Images\Teams\2a7f9c15-5a9e-4c07-9fea-d630375d82c8_Chelsea_FC.svg.png
+wwwroot\assets\Images\Teams\2c237aef-6eed-4e3c-9520-9b71414a3ede_LA Galaxy.jpeg
+wwwroot\assets\Images\Teams\4e8f94ed-c3d8-4ca6-a13c-8cfb5cbbc2d1_ab6761610000517453314b0b73aff313933e8f5d.jpeg
+wwwroot\assets\Images\Teams\573711a1-57af-437e-99a5-89fe5c79cd6c_Anderlecht.jpeg
+wwwroot\assets\Images\Teams\57d8c2fe-cd42-4a71-8004-513836086ad8_Celtic FC.jpeg
+wwwroot\assets\Images\Teams\5ce35dad-4e1e-4fc3-a363-c1deaeaac9fc_Borussia-Dortmund-Logo-football-Bundesliga-transparent-PNG-image-jpg.webp
+wwwroot\assets\Images\Teams\5e6d449f-7780-4e9a-86df-648c91daa6c7_download (6).jpeg
+wwwroot\assets\Images\Teams\644e6c59-a66f-4a68-9b4a-d15b37db30df_Bayer Leverkusen.jpeg
+wwwroot\assets\Images\Teams\6aa32b69-038a-451c-91f9-4728d8f1691b_arsenal-fc-logo-white-background-600nw-2403695371.webp
+wwwroot\assets\Images\Teams\73d9e66e-4437-4eb1-9b69-3c296579c98b_real-madrid-c-f-logo-png-transparent.png
+wwwroot\assets\Images\Teams\752ab8e8-7c18-4166-9de0-a6cdd1c16aef_Rangers FC.jpeg
+wwwroot\assets\Images\Teams\7c22c051-dde4-4530-bb15-ac7470ff79b2_Inter Miami.jpeg
+wwwroot\assets\Images\Teams\7f2afc9c-c33c-4d9c-b11b-fee7f9a1ef0c_Sao Paulo FC.png
+wwwroot\assets\Images\Teams\8004a0f1-d7dd-4dc3-b118-064df17d7729_download (13).png
+wwwroot\assets\Images\Teams\80a54274-33b5-410b-b024-a18c27213d30_milan-logo-white-background-surabaya-600nw-2403695437.webp
+wwwroot\assets\Images\Teams\8ac09ee5-a1ed-45bc-8e6e-fd26d6c900d9_Sporting CP.png
+wwwroot\assets\Images\Teams\8b1d7065-2c37-4198-a02c-dcdb2123c316_Fenerbahce.jpeg
+wwwroot\assets\Images\Teams\8d74b143-5f86-49bc-bcf0-8022bf564eb6_Club America.jpeg
+wwwroot\assets\Images\Teams\8e0ae175-9c32-4d0c-bea9-18e368b18412_50dbb66897a1796fa99ec35d7846e8a1.jpg
+wwwroot\assets\Images\Teams\96ba5da4-5774-49f8-8e24-62ce000b667f_download (1).jpeg
+wwwroot\assets\Images\Teams\9c2c7753-4826-406a-972b-c37e08a67079_tottenham-hotspur-logo-png_seeklogo-141268.png
+wwwroot\assets\Images\Teams\a170c8d6-f59e-4941-a605-572ec403cd7c_Galatasaray.jpg
+wwwroot\assets\Images\Teams\a491f68f-00e8-4b42-a302-a5a07ec01401_download.jpeg
+wwwroot\assets\Images\Teams\adab8f07-9bd8-44dd-9bf6-0301baeeed55_FC_Bayern_Munich_5_Stars.svg.png
+wwwroot\assets\Images\Teams\b790f072-07ad-4fd7-aa43-a322ce89357f_download.png
+wwwroot\assets\Images\Teams\b8c89a1a-704a-46bc-9bd9-8f857d561785_Corinthians.png
+wwwroot\assets\Images\Teams\c28b0a5a-3b60-43d3-bc15-77013f0edde9_Atalanta.png
+wwwroot\assets\Images\Teams\c54ce4ad-80dd-4525-b15e-33846d56ace5_Chivas Guadalajara.jpeg
+wwwroot\assets\Images\Teams\c79dfcae-4248-4ad9-a919-28dded169863_Corinthians.png
+wwwroot\assets\Images\Teams\c8717f74-fa4f-468f-98b7-f2eb059c884f_download (3).png
+wwwroot\assets\Images\Teams\cf610117-2c5b-4e47-94e9-f8eaf7880b40_Atletico Madrid.jpeg
+wwwroot\assets\Images\Teams\d285336c-40b7-4412-9deb-d5f4144196a5_liverpool-club-logo-symbol-premier-league-football-abstract-design-illustration-free-vector.jpg
+wwwroot\assets\Images\Teams\d7fbaae9-c92b-4348-b70d-e736945abfe7_download (1).png
+wwwroot\assets\Images\Teams\dc825d45-e0a7-416d-8343-724145e17e94_Manchester_United_FC_crest.svg.webp
+wwwroot\assets\Images\Teams\e2ec1848-e552-4db8-acc4-28eb64e24e51_Aston Villa.jpeg
+wwwroot\assets\Images\Teams\fc43f795-ceb9-42eb-a707-45f1f32e1f92_AS Roma.png
+wwwroot\assets\Images\Users\598c1a59-1f6f-4aed-ad37-1cbf3d102a59_Daniel Gallego (1).png
+wwwroot\assets\Images\Users\94793824-8847-4155-a2fb-1e93b60e9e6e_photo_2025-04-20_11-07-43.jpg
+wwwroot\assets\Images\Users\e7259445-56fc-4ce5-b2f9-80bbca90f241_Daniel Gallego (1).png
+wwwroot\css\Profile.css
+wwwroot\css\site.css
+wwwroot\favicon.ico
+wwwroot\images.jpeg
+wwwroot\js\CheckImageTypes.js
+wwwroot\js\site.js
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-grid.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-reboot.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap-utilities.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.min.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.css.map
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css
+wwwroot\lib\bootstrap\dist\css\bootstrap.rtl.min.css.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.bundle.min.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.esm.min.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.js.map
+wwwroot\lib\bootstrap\dist\js\bootstrap.min.js
+wwwroot\lib\bootstrap\dist\js\bootstrap.min.js.map
+wwwroot\lib\bootstrap\LICENSE
+wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.js
+wwwroot\lib\jquery-validation-unobtrusive\jquery.validate.unobtrusive.min.js
+wwwroot\lib\jquery-validation-unobtrusive\LICENSE.txt
+wwwroot\lib\jquery-validation\dist\additional-methods.js
+wwwroot\lib\jquery-validation\dist\additional-methods.min.js
+wwwroot\lib\jquery-validation\dist\jquery.validate.js
+wwwroot\lib\jquery-validation\dist\jquery.validate.min.js
+wwwroot\lib\jquery-validation\LICENSE.md
+wwwroot\lib\jquery\dist\jquery.js
+wwwroot\lib\jquery\dist\jquery.min.js
+wwwroot\lib\jquery\dist\jquery.min.map
+wwwroot\lib\jquery\LICENSE.txt
+wwwroot\rhzcnrvogeqg2dg8ttjg.png

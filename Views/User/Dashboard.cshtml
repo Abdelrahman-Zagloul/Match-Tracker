@@ -1,0 +1,88 @@
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
+}
+
+<h2 class="text-center my-4 text-primary fw-bold">
+    <i class="bi bi-speedometer2 me-2"></i> Admin Dashboard
+</h2>
+
+<div class="container" style=" height: 100vh;">
+    <div class="row g-4 justify-content-center">
+        @* Users *@
+        <div class="col-md-4">
+            <a asp-controller="User" asp-action="Index" class="text-decoration-none">
+                <div class="card shadow-sm text-center border-0 dashboard-card h-100">
+                    <div class="card-body">
+                        <i class="bi bi-people-fill fs-1 text-primary"></i>
+                        <h5 class="card-title mt-3">Manage Users</h5>
+                        <p class="text-muted">View, edit, and delete users</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        @* Teams *@
+        <div class="col-md-4">
+            <a asp-controller="Team" asp-action="Index" class="text-decoration-none">
+                <div class="card shadow-sm text-center border-0 dashboard-card h-100">
+                    <div class="card-body">
+                        <i class="bi bi-shield-fill fs-1 text-success"></i>
+                        <h5 class="card-title mt-3">Manage Teams</h5>
+                        <p class="text-muted">Add and update team info</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        @* Players *@
+        <div class="col-md-4">
+            <a asp-controller="Player" asp-action="Index" class="text-decoration-none">
+                <div class="card shadow-sm text-center border-0 dashboard-card h-100">
+                    <div class="card-body">
+                        <i class="bi bi-person-lines-fill fs-1 text-warning"></i>
+                        <h5 class="card-title mt-3">Manage Players</h5>
+                        <p class="text-muted">Create and manage players</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        @* Stadiums *@
+        <div class="col-md-4">
+            <a asp-controller="Stadium" asp-action="Index" class="text-decoration-none">
+                <div class="card shadow-sm text-center border-0 dashboard-card h-100">
+                    <div class="card-body">
+                        <i class="bi bi-building fs-1 text-info"></i>
+                        <h5 class="card-title mt-3">Manage Stadiums</h5>
+                        <p class="text-muted">Edit stadium info and capacity</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        @* Matches *@
+        <div class="col-md-4">
+            <a asp-controller="Match" asp-action="Index" class="text-decoration-none">
+                <div class="card shadow-sm text-center border-0 dashboard-card h-100">
+                    <div class="card-body">
+                        <i class="bi bi-calendar-check-fill fs-1 text-danger"></i>
+                        <h5 class="card-title mt-3">Manage Matches</h5>
+                        <p class="text-muted">Create, schedule and manage matches</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .dashboard-card {
+        transition: all 0.3s ease;
+        border-radius: 1rem;
+    }
+
+        .dashboard-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
+        }
+</style>

@@ -1,0 +1,45 @@
+﻿@{
+    ViewData["Title"] = "Authentication Required";
+}
+
+<div class="container d-flex justify-content-center align-items-center" style="min-height: 85vh;">
+    <div class="card border-0 shadow-lg p-4 animate__animated animate__fadeInDown"
+         style="max-width: 500px; width: 100%; border-radius: 1rem; transition: 0.3s ease;">
+        <div class="card-body text-center">
+            <i class="bi bi-shield-lock-fill text-primary fs-1 mb-3"></i>
+
+            <h3 class="fw-bold text-dark mb-3">Authentication Required</h3>
+
+            <p class="text-muted mb-4">
+                To continue, please log in with your account credentials.<br />
+                This page is restricted to authenticated users only.
+            </p>
+
+            <a asp-controller="Account" asp-action="Login" class="btn btn-primary custom-btn px-4 py-2">
+                <i class="bi bi-box-arrow-in-right me-1"></i> Login Now
+            </a>
+        </div>
+    </div>
+</div>
+
+<style>
+    .custom-btn {
+        font-weight: 600;
+        border-radius: 0.5rem;
+        transition: all 0.3s ease-in-out;
+        box-shadow: 0 4px 12px rgba(13, 110, 253, 0.2);
+    }
+
+        .custom-btn:hover {
+            transform: translateY(-2px);
+            background-color: #0a58ca;
+            box-shadow: 0 6px 16px rgba(13, 110, 253, 0.35);
+        }
+
+    .card:hover {
+        transform: scale(1.015);
+        box-shadow: 0 12px 28px rgba(0, 0, 0, 0.1);
+    }
+</style>
+
+<link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet" />

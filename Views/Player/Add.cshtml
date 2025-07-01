@@ -1,0 +1,191 @@
+﻿@model PlayerForAddViewModel
+
+@{
+    ViewData["Title"] = "Add Player";
+}
+
+<style>
+    .form-label {
+        font-weight: 600;
+        color: #444;
+    }
+
+    .form-control, .form-select {
+        border-radius: 0.5rem;
+    }
+
+    .img-preview {
+        width: 180px;
+        height: 240px;
+        object-fit: cover;
+        border-radius: 0.75rem;
+        border: 1px solid #ccc;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+    .img-placeholder {
+        width: 180px;
+        height: 240px;
+        background-color: #f0f0f0;
+        color: #999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 0.75rem;
+        font-size: 0.9rem;
+        border: 1px dashed #ccc;
+    }
+
+    .btn-outline-secondary:hover {
+        background-color: #6c757d;
+        color: #fff;
+        border-color: #6c757d;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .btn-success:hover {
+        background-color: #218838;
+        transition: all 0.3s ease-in-out;
+    }
+
+    .img-preview:hover {
+        transform: scale(1.03);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+        transition: all 0.3s ease-in-out;
+    }
+
+    .img-placeholder:hover {
+        background-color: #e0e0e0;
+        transition: background-color 0.3s ease-in-out;
+    }
+
+    .form-control:hover, .form-select:hover {
+        border-color: #86b7fe;
+        box-shadow: 0 0 0 0.15rem rgba(13, 110, 253, 0.25);
+        transition: all 0.2s ease-in-out;
+    }
+
+</style>
+
+<div class="container mt-4" style=" height: 100vh;">
+    <div class="card shadow-sm">
+        <div class="row g-0">
+            <div class="col-md-7 p-4">
+                <h3 class="text-primary fw-bold mb-3">🧍 Add New Player</h3>
+                <form asp-action="SaveAdd" enctype="multipart/form-data">
+                    <div asp-validation-summary="ModelOnly" class="alert alert-danger small"></div>
+
+                    <div class="row g-2">
+                        <div class="col-md-6">
+                            <label asp-for="Name" class="form-label">Name</label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Nationality" class="form-label">Nationality</label>
+                            <input asp-for="Nationality" class="form-control" />
+                            <span asp-validation-for="Nationality" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="Number" class="form-label">Number</label>
+                            <input asp-for="Number" class="form-control" min="1" />
+                            <span asp-validation-for="Number" class="text-danger small"></span>
+                        </div>
+                        <div class="col-md-6">
+                            <label asp-for="Age" class="form-label">Age</label>
+                            <input asp-for="Age" class="form-control" min="18" max="40" />
+                            <span asp-validation-for="Age" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="MatchesPlayed" class="form-label">Matches Played</label>
+                            <input asp-for="MatchesPlayed" class="form-control" min="1" max="2000" />
+                            <span asp-validation-for="MatchesPlayed" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="GoalsScored" class="form-label">Goals Scored</label>
+                            <input asp-for="GoalsScored" class="form-control" min="1" max="1000" />
+                            <span asp-validation-for="GoalsScored" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="Assists" class="form-label">Assists</label>
+                            <input asp-for="Assists" class="form-control" min="1" max="1000" />
+                            <span asp-validation-for="Assists" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label asp-for="Position" class="form-label">Position</label>
+                            <select asp-for="Position" asp-items="@Model.Positions" class="form-select">
+                                <option value="">-- Select Position --</option>
+                            </select>
+                            <span asp-validation-for="Position" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label asp-for="TeamId" class="form-label">Team</label>
+                            <select asp-for="TeamId" asp-items="@Model.Teams" class="form-select">
+                                <option value="">-- Select Team --</option>
+                            </select>
+                            <span asp-validation-for="TeamId" class="text-danger small"></span>
+                        </div>
+
+                        <div class="col-md-12">
+                            <label asp-for="ImageFile" class="form-label">Player Picture</label>
+                            <input asp-for="ImageFile" type="file" class="form-control" onchange="previewPicture(event)" />
+                            <span asp-validation-for="ImageFile" class="text-danger small"></span>
+                        </div>
+                    </div>
+
+                    <div class="d-flex justify-content-between mt-4">
+                        <a asp-action="Index" class="btn btn-outline-secondary">
+                            <i class="bi bi-arrow-left"></i> Back to List
+                        </a>
+                        <button type="submit" class="btn btn-outline-success">
+                            <i class="bi bi-plus-circle"></i> Add Player
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Right Side: Preview -->
+            <div class="col-md-5 bg-light d-flex flex-column align-items-center justify-content-center p-4">
+                <div class="text-center">
+                    <p class="text-muted mb-1">Picture Preview</p>
+                    <div id="imageContainer">
+                        <div id="placeholderText" class="img-placeholder">No Image</div>
+                        <img id="PicturePreview" class="img-preview" src="#" alt="Preview" style="display: none;" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script src="~/js/CheckImageTypes.js"></script>
+    <script>
+        function previewPicture(event) {
+            const input = event.target;
+            const preview = document.getElementById('PicturePreview');
+            const placeholder = document.getElementById('placeholderText');
+
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    preview.src = e.target.result;
+                    preview.style.display = 'block';
+                    placeholder.style.display = 'none';
+                };
+                reader.readAsDataURL(input.files[0]);
+            } else {
+                preview.src = '#';
+                preview.style.display = 'none';
+                placeholder.style.display = 'flex';
+            }
+        }
+    </script>
+}

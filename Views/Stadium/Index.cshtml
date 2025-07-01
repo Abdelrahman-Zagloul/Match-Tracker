@@ -1,0 +1,151 @@
+﻿@model List<Stadium>
+
+@{
+    ViewData["Title"] = "Stadiums";
+}
+
+<style>
+    .table thead th {
+        vertical-align: middle;
+        background-color: #0d6efd;
+        color: #fff;
+        border: none;
+        font-size: 0.95rem;
+    }
+
+    .table tbody td {
+        background-color: #fdfdfd;
+        vertical-align: middle;
+        font-size: 0.93rem;
+    }
+
+    .table tbody tr:hover {
+        background-color: #f0f8ff;
+    }
+
+    .img-logo {
+        width: 65px;
+        height: 65px;
+        object-fit: cover;
+        border-radius: 0.5rem;
+        border: 1px solid #ccc;
+    }
+
+    .badge {
+        font-size: 0.85rem;
+        padding: 0.4em 0.7em;
+        border-radius: 0.7rem;
+    }
+
+    .btn-group .btn {
+        padding: 0.3rem 0.6rem;
+        font-size: 0.85rem;
+    }
+
+    .btn-rounded {
+        border-radius: 50px;
+        font-weight: 500;
+    }
+</style>
+
+
+<div class="container mt-4 mb-5">
+    <div class="row align-items-center mb-3">
+        <div class="col-md-4 text-start">
+            <h2 class="text-primary fw-bold">🏟️ Stadiums</h2>
+        </div>
+        <div class="col-md-4 text-center">
+            <input type="text" id="searchInput" class="form-control w-75 mx-auto" placeholder="🔍 Search..." onkeyup="filterTable()" />
+        </div>
+        <div class="col-md-4 text-end">
+            <div class="btn-group">
+                <a asp-action="Add" asp-controller="Stadium"
+                   class="btn btn-outline-success me-2   btn-lg py-2">
+                    <i class="bi bi-plus-circle-fill me-1"></i> Add New
+                </a>
+                <a asp-action="Clear"
+                   class="btn btn-outline-danger  btn-lg  py-2"
+                   onclick="return confirm('Are you sure you want to clear all stadiums?');">
+                    <i class="bi bi-trash-fill me-1"></i> Clear All
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<div class="card shadow-sm rounded-4">
+    <div class="card-body">
+        <div class="table-responsive">
+            <table class="table table-bordered align-middle text-center shadow-sm table-hover rounded-4 overflow-hidden">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Name</th>
+                        <th>Location</th>
+                        <th>Capacity</th>
+                        <th>Team</th>
+                        <th>Logo</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var stadium in Model)
+                    {
+                        <tr>
+                            <td class="fw-semibold">@stadium.Name</td>
+                            <td>@stadium.Location</td>
+                            <td><span class="badge bg-success">@stadium.Capacity</span></td>
+                            <td>@stadium.Team?.Name</td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(stadium.Team?.LogoPath))
+                                {
+                                    <img src="/@FileSetting.TeamImagesFolderPath/@stadium.Team.LogoPath"
+                                         alt="Team Logo" class="img-logo" />
+                                }
+                                else
+                                {
+                                    <span class="text-muted">No Logo</span>
+                                }
+                            </td>
+                            <td>
+                                <div class="btn-group">
+                                    <a asp-action="GetById" asp-route-id="@stadium.Id"
+                                       class="btn btn-outline-info btn-sm"
+                                       title="Details">
+                                        <i class="bi bi-info-circle"></i>
+                                    </a>
+                                    <a asp-action="Update" asp-route-id="@stadium.Id"
+                                       class="btn btn-outline-warning btn-sm"
+                                       title="Edit">
+                                        <i class="bi bi-pencil-square"></i>
+                                    </a>
+                                    <a asp-action="Delete" asp-route-id="@stadium.Id"
+                                       class="btn btn-outline-danger btn-sm"
+                                       onclick="return confirm('Are you sure you want to delete this stadium?');"
+                                       title="Delete">
+                                        <i class="bi bi-trash"></i>
+                                    </a>
+                                </div>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts {
+    <script>
+        function filterTable() {
+            const input = document.getElementById("searchInput").value.toLowerCase();
+            const rows = document.querySelectorAll("tbody tr");
+
+            rows.forEach(row => {
+                const text = row.textContent.toLowerCase();
+                row.style.display = text.includes(input) ? "" : "none";
+            });
+        }
+    </script>
+}

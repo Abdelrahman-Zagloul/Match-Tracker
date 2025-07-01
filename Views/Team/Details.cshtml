@@ -1,0 +1,146 @@
+﻿@model Team
+
+@{
+    ViewData["Title"] = "Team Details";
+    bool isUser = User.IsInRole("User");
+    int matchId = int.Parse(Context.Request?.Cookies["MatchId"]);
+}
+
+<style>
+    .team-card {
+        border-radius: 1rem;
+        box-shadow: 0 8px 24px rgba(0,0,0,0.08);
+        overflow: hidden;
+    }
+
+    .team-header {
+        background: linear-gradient(90deg, #0d6efd, #007bff);
+        color: white;
+        padding: 1rem 1.5rem;
+        border-radius: 1rem 1rem 0 0;
+    }
+
+    .team-logo {
+        width: 120px;
+        height: 120px;
+        object-fit: contain;
+        border-radius: 50%;
+        border: 4px solid white;
+        box-shadow: 0 0 12px rgba(0,0,0,0.1);
+    }
+
+    .hover-card {
+        border-radius: 1rem;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+        .hover-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 0.75rem 1.5rem rgba(0, 0, 0, 0.1);
+        }
+
+    .btn-rounded {
+        border-radius: 50px;
+        padding: 0.5rem 1.5rem;
+        font-weight: 500;
+    }
+</style>
+
+<div class="container mt-5 mb-5">
+    <div class="card team-card">
+        <div class="team-header d-flex align-items-center justify-content-between">
+            <h4 class="mb-0">
+                <i class="bi bi-shield-fill me-2"></i> @Model.Name
+            </h4>
+            <img src="/@FileSetting.TeamImagesFolderPath/@Model.LogoPath"
+                 class="team-logo"
+                 alt="Team Logo" />
+        </div>
+
+        <div class="card-body p-4">
+            <div class="row">
+                <div class="col-md-6">
+                    <p><i class="bi bi-person-video2 text-primary me-1"></i> <strong>Coach:</strong> @Model.CoachName</p>
+                    <p><i class="bi bi-globe2 text-primary me-1"></i> <strong>Country:</strong> @Model.Country</p>
+                    <p><i class="bi bi-calendar-event text-primary me-1"></i> <strong>Founded:</strong> @Model.FoundedYear</p>
+                </div>
+                <div class="col-md-6">
+                    <p><i class="bi bi-trophy-fill text-success me-1"></i> <strong>Championships:</strong> <span class="badge bg-success">@Model.ChampionshipsWon</span></p>
+                    <p><i class="bi bi-people-fill text-info me-1"></i> <strong>Players:</strong> <span class="badge bg-primary">@Model.Players?.Count</span></p>
+                </div>
+            </div>
+
+            <hr />
+
+            <h5><i class="bi bi-building text-primary me-1"></i> Stadium Info</h5>
+            @if (Model.Stadium is not null)
+            {
+                <p><strong>Name:</strong> @Model.Stadium.Name</p>
+                <p><strong>Capacity:</strong> @Model.Stadium.Capacity</p>
+                <p><strong>Location:</strong> @Model.Stadium.Location</p>
+                <a asp-action="GetById" asp-controller="Stadium" asp-route-id="@Model.Stadium.Id"
+                   class="btn btn-outline-primary btn-sm mt-2 btn-rounded">
+                    <i class="bi bi-eye me-1"></i> View Stadium
+                </a>
+            }
+            else
+            {
+                <p class="text-muted fst-italic">No stadium assigned.</p>
+            }
+
+            <hr />
+
+            <h5><i class="bi bi-person-lines-fill text-primary me-1"></i> Players</h5>
+            @if (Model.Players?.Any() == true)
+            {
+                <div class="row row-cols-1 row-cols-md-2 g-3">
+                    @foreach (var player in Model.Players)
+                    {
+                        <div class="col">
+                            <div class="card hover-card border-0 shadow-sm h-100">
+                                <div class="card-body">
+                                    <h5 class="card-title">
+                                        <a asp-action="SearchByName"
+                                           asp-controller="Player"
+                                           asp-route-playerName="@player.Name"
+                                           class="text-decoration-none text-primary fw-bold">
+                                            <i class="bi bi-person-circle me-1"></i>@player.Name
+                                        </a>
+                                    </h5>
+                                    <p class="mb-1"><strong>Position:</strong> @player.Position</p>
+                                    <p class="mb-1 text-muted small">
+                                        <i class="bi bi-hourglass-split me-1"></i> Age: @player.Age | Matches: @player.MatchesPlayed
+                                    </p>
+                                    <p class="mb-1 text-muted small">
+                                        <i class="bi bi-stars me-1"></i> Assists: @player.Assists | Goals: @player.GoalsScored
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            }
+            else
+            {
+                <p class="text-muted fst-italic">No players found.</p>
+            }
+        </div>
+    </div>
+
+    <div class="text-center mt-4">
+        @if (isUser)
+        {
+            <a asp-controller="Match" asp-action="Details" asp-route-id="@matchId"
+               class="btn btn-outline-secondary btn-rounded px-4">
+                <i class="bi bi-arrow-left-circle me-1"></i> Back
+            </a>
+        }
+        else
+        {
+            <a asp-action="Index" asp-controller="Team"
+               class="btn btn-outline-secondary btn-rounded px-4">
+                <i class="bi bi-arrow-left-circle me-1"></i> Back to List
+            </a>
+        }
+    </div>
+</div>

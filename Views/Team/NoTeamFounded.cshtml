@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "No Team Found";
+}
+
+<style>
+    .no-result-card {
+        background-color: #fff3cd;
+        border: 1px solid #ffeeba;
+        border-radius: 1rem;
+        padding: 30px;
+        box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+        transition: 0.3s;
+    }
+
+    .no-result-icon {
+        font-size: 2.5rem;
+        color: #ffc107;
+    }
+
+    .back-btn {
+        border-radius: 50px;
+        font-weight: 500;
+        padding: 8px 20px;
+    }
+</style>
+
+<div class="container mt-5">
+    <div class="no-result-card text-center">
+        <div class="no-result-icon mb-3">
+            <i class="bi bi-exclamation-triangle-fill"></i>
+        </div>
+        <h4 class="fw-bold text-warning">No Team Found</h4>
+        <p class="text-muted">Try searching again or go back to the main list.</p>
+
+        <a asp-action="Index" class="btn btn-outline-primary back-btn mt-3">
+            <i class="bi bi-arrow-left-circle"></i> Back to List
+        </a>
+    </div>
+</div>

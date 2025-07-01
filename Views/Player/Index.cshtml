@@ -1,0 +1,106 @@
+﻿@model List<Player>
+
+@{
+    ViewData["Title"] = "All Players";
+}
+
+<div class="container mt-5">
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="fw-bold text-primary">
+            <i class="bi bi-people-fill me-2"></i> All Players
+        </h2>
+        <div class="btn-group">
+            <a asp-action="Add" class="btn btn-outline-success">
+                <i class="bi bi-plus-circle me-1"></i> Add Player
+            </a>
+            <a asp-action="Clear" class="btn btn-outline-danger"
+               onclick="return confirm('Are you sure you want to clear all players?');">
+                <i class="bi bi-trash me-1"></i> Clear All
+            </a>
+        </div>
+    </div>
+
+    <!-- Search Inputs -->
+    <div class="row g-3 mb-4">
+        <div class="col-md-4">
+            <form asp-action="SearchByName" class="input-group shadow-sm">
+                <span class="input-group-text bg-white"><i class="bi bi-person-search text-muted"></i></span>
+                <input name="playerName" class="form-control" placeholder="Search by Name" required />
+                <button class="btn btn-outline-primary" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <form asp-action="SearchByCountry" class="input-group shadow-sm">
+                <span class="input-group-text bg-white"><i class="bi bi-globe text-muted"></i></span>
+                <input name="countryName" class="form-control" placeholder="Search by Country" required />
+                <button class="btn btn-outline-primary" type="submit">Search</button>
+            </form>
+        </div>
+        <div class="col-md-4">
+            <form asp-action="SearchByTeam" class="input-group shadow-sm">
+                <span class="input-group-text bg-white"><i class="bi bi-building text-muted"></i></span>
+                <input name="teamName" class="form-control" placeholder="Search by Team" required />
+                <button class="btn btn-outline-primary" type="submit">Search</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Table -->
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover align-middle text-center shadow-sm">
+            <thead class="table-primary">
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Nationality</th>
+                    <th>Number</th>
+                    <th>Age</th>
+                    <th>Matches</th>
+                    <th>Goals</th>
+                    <th>Assists</th>
+                    <th>Position</th>
+                    <th>Team</th>
+                    <th>Logo</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var player in Model)
+                {
+                    <tr>
+                        <td>@player.Id</td>
+                        <td>@player.Name</td>
+                        <td>@player.Nationality</td>
+                        <td>@player.Number</td>
+                        <td>@player.Age</td>
+                        <td>@player.MatchesPlayed</td>
+                        <td>@player.GoalsScored</td>
+                        <td>@player.Assists</td>
+                        <td>@player.Position</td>
+                        <td>@player.Team?.Name</td>
+                        <td>
+                            <img src="/@FileSetting.TeamImagesFolderPath/@player.Team?.LogoPath" alt="Logo"
+                                 class="rounded-circle border" style="width: 45px; height: 45px; object-fit: cover;" />
+                        </td>
+                        <td>
+                            <div class="btn-group">
+                                <a asp-action="GetById" asp-route-id="@player.Id" class="btn btn-outline-info" title="Details">
+                                    <i class="bi bi-info-circle"></i>
+                                </a>
+                                <a asp-action="Update" asp-route-id="@player.Id" class="btn btn-outline-warning" title="Edit">
+                                    <i class="bi bi-pencil-square"></i>
+                                </a>
+                                <a asp-action="Delete" asp-route-id="@player.Id"
+                                   class="btn btn-outline-danger"
+                                   onclick="return confirm('Are you sure you want to delete this player?');"
+                                   title="Delete">
+                                    <i class="bi bi-trash"></i>
+                                </a>
+                            </div>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+</div>

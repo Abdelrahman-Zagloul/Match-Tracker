@@ -1,0 +1,189 @@
+﻿@model List<Team>
+
+@{
+    ViewData["Title"] = "Search by Country";
+    var teamCount = Model?.Count ?? 0;
+    var teamWord = teamCount == 1 ? "Team" : "Teams";
+}
+
+<style>
+    .search-box {
+        width: 100%;
+        max-width: 350px;
+        border-radius: 0.5rem;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+        transition: 0.3s;
+    }
+
+        .search-box:focus {
+            border-color: #0d6efd;
+            box-shadow: 0 0 0 0.2rem rgba(13, 110, 253, 0.25);
+        }
+
+    .custom-table thead th {
+        background-color: #0d6efd;
+        color: #fff;
+        font-weight: 600;
+        padding: 14px;
+        border: none;
+    }
+
+    .custom-table tbody tr:hover {
+        background-color: #f8f9fa;
+    }
+
+    .custom-table td {
+        padding: 12px;
+        vertical-align: middle;
+        font-size: 0.95rem;
+    }
+
+    .img-logo {
+        width: 65px;
+        height: 65px;
+        object-fit: contain;
+        border-radius: 10px;
+        transition: transform 0.3s ease;
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    }
+
+        .img-logo:hover {
+            transform: scale(1.07);
+        }
+
+    .badge {
+        font-size: 0.85rem;
+        padding: 6px 10px;
+        border-radius: 12px;
+        font-weight: 500;
+    }
+
+        .badge.bg-success {
+            background-color: #198754 !important;
+        }
+
+        .badge.bg-primary {
+            background-color: #0d6efd !important;
+        }
+
+    .table-title {
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    .text-muted-sm {
+        font-size: 0.9rem;
+        color: #6c757d;
+    }
+
+</style>
+
+<div class="container mt-5">
+    <div class="text-center mb-4">
+        <h2 class="text-primary table-title">
+            <i class="bi bi-search"></i>
+            <span class="fw-bold">@teamCount</span> @teamWord Found
+        </h2>
+        <p class="text-muted-sm">Showing teams filtered by country</p>
+    </div>
+
+    <div class="mb-4 d-flex justify-content-center">
+        <input type="text"
+               id="searchInput"
+               class="form-control search-box"
+               placeholder="🔍 Search teams..."
+               onkeyup="filterTable()" />
+    </div>
+
+    @if (Model != null && Model.Any())
+    {
+        <div class="card shadow-sm border-0 rounded-4">
+            <div class="card-body p-4">
+                <div class="table-responsive">
+                    <table id="teamTable" class="table custom-table text-center align-middle">
+                        <thead>
+                            <tr>
+                                <th>Logo</th>
+                                <th>Name</th>
+                                <th>Coach</th>
+                                <th>Country</th>
+                                <th>Founded</th>
+                                <th>Championships</th>
+                                <th>Stadium</th>
+                                <th>Players</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var team in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @if (!string.IsNullOrEmpty(team.LogoPath))
+                                        {
+                                            <img src="/@FileSetting.TeamImagesFolderPath/@team.LogoPath" alt="Logo" class="img-logo" />
+                                        }
+                                        else
+                                        {
+                                            <span class="text-muted">No Logo</span>
+                                        }
+                                    </td>
+                                    <td class="fw-semibold text-capitalize">@team.Name</td>
+                                    <td>@team.CoachName</td>
+                                    <td>@team.Country</td>
+                                    <td>@team.FoundedYear</td>
+                                    <td><span class="badge bg-success">@team.ChampionshipsWon</span></td>
+                                    <td>@team.Stadium?.Name</td>
+                                    <td><span class="badge bg-primary">@team.Players?.Count()</span></td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card-footer bg-white border-0 d-flex justify-content-center py-3">
+                <a asp-action="Index" asp-controller="Team" class="btn btn-primary px-4 py-2 rounded-pill fw-semibold">
+                    <i class="bi bi-arrow-left-circle me-1"></i> Back to List
+                </a>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-warning text-center">
+            <i class="bi bi-exclamation-triangle-fill me-2"></i> No teams found for the selected country.
+        </div>
+
+        <div class="card-footer bg-white border-0 d-flex justify-content-center py-3">
+            <a asp-action="Index" asp-controller="Team" class="btn btn-primary px-4 py-2 rounded-pill fw-semibold">
+                <i class="bi bi-arrow-left-circle me-1"></i> Back to List
+            </a>
+        </div>
+    }
+</div>
+
+@section Scripts {
+    <script>
+        function filterTable() {
+            const input = document.getElementById("searchInput");
+            const filter = input.value.toLowerCase();
+            const table = document.getElementById("teamTable");
+            const rows = table.getElementsByTagName("tr");
+
+            for (let i = 1; i < rows.length; i++) {
+                const cells = rows[i].getElementsByTagName("td");
+                let match = false;
+
+                for (let j = 1; j < cells.length - 1; j++) {
+                    const text = cells[j].textContent || cells[j].innerText;
+                    if (text.toLowerCase().includes(filter)) {
+                        match = true;
+                        break;
+                    }
+                }
+
+                rows[i].style.display = match ? "" : "none";
+            }
+        }
+    </script>
+}

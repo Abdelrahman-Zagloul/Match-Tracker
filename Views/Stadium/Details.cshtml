@@ -1,0 +1,102 @@
+﻿@model Stadium
+
+@{
+    ViewData["Title"] = "Stadium Details";
+}
+
+<style>
+    .details-card {
+        background: linear-gradient(to right, #fdfbfb, #ebedee);
+        border-radius: 1rem;
+        box-shadow: 0 6px 24px rgba(0, 0, 0, 0.1);
+        overflow: hidden;
+    }
+
+    .details-img {
+        width: 230px;
+        height: 230px;
+        object-fit: contain;
+        border-radius: 0.75rem;
+        box-shadow: 0 0.5rem 1rem rgba(0,0,0,0.1);
+    }
+
+    .list-group-item i {
+        width: 22px;
+    }
+
+    .btn-rounded {
+        border-radius: 50px;
+        font-weight: 500;
+        padding: 0.5rem 1.25rem;
+    }
+</style>
+
+<div class="container mt-5" style="height:100vh;">
+    <h2 class="text-center text-primary mb-5">
+        <i class="bi bi-building"></i> Stadium Details
+    </h2>
+
+    <div class="card details-card">
+        <div class="row g-0">
+            <div class="col-md-4 bg-light d-flex align-items-center justify-content-center p-4">
+                @if (!string.IsNullOrEmpty(Model.Team?.LogoPath))
+                {
+                    <img src="/@FileSetting.TeamImagesFolderPath/@Model.Team.LogoPath"
+                         alt="Team Logo"
+                         class="details-img" />
+                }
+                else
+                {
+                    <span class="text-muted">No Logo Available</span>
+                }
+            </div>
+
+            <div class="col-md-8">
+                <div class="card-body p-5">
+                    <h3 class="card-title text-dark mb-4 fw-bold">@Model.Name</h3>
+
+                    <ul class="list-group list-group-flush mb-4">
+                        <li class="list-group-item">
+                            <i class="bi bi-geo-alt-fill text-danger me-2"></i>
+                            <strong>Location:</strong> @Model.Location
+                        </li>
+                        <li class="list-group-item">
+                            <i class="bi bi-people-fill text-success me-2"></i>
+                            <strong>Capacity:</strong> @Model.Capacity
+                        </li>
+                        <li class="list-group-item">
+                            <i class="bi bi-person-badge-fill text-primary me-2"></i>
+                            <strong>Team:</strong> @Model.Team?.Name
+                        </li>
+                    </ul>
+
+                    <div class="card-footer bg-white border-0 px-0">
+                        @if (User.IsInRole("Admin"))
+                        {
+                            <div class="d-flex justify-content-between">
+                                <a asp-action="Index" class="btn btn-outline-primary ">
+                                    <i class="bi bi-arrow-left-circle me-1"></i> Back
+                                </a>
+
+                                <a asp-action="Update" asp-route-id="@Model.Id"
+                                   class="btn btn-outline-warning text-black btn-rounded">
+                                    <i class="bi bi-pencil-square me-1"></i> Edit
+                                </a>
+                            </div>
+                        }
+                        else
+                        {
+                            <div class="d-flex justify-content-center">
+                                <a asp-action="SearchByName" asp-controller="Team" asp-route-teamName="@Model.Team.Name"
+                                   class="btn btn-outline-secondary">
+                                    <i class="bi bi-arrow-left-circle me-1"></i> Back
+                                </a>
+                            </div>
+                        }
+                    </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
