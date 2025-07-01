@@ -294,3 +294,4 @@ D:\DevZone\Code Files\MVC\MatchTracker\bin\Debug\net8.0\runtimes\win\lib\net7.0\
 D:\DevZone\Code Files\MVC\MatchTracker\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Drawing.Common.dll
 D:\DevZone\Code Files\MVC\MatchTracker\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Security.Cryptography.ProtectedData.dll
 D:\DevZone\Code Files\MVC\MatchTracker\bin\Debug\net8.0\runtimes\win\lib\net7.0\System.Windows.Extensions.dll
+D:\DevZone\Code Files\MVC\MatchTracker\obj\Debug\net8.0\MatchTracker.sourcelink.json

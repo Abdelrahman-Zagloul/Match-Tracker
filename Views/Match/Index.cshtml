@@ -7,8 +7,6 @@
         ? DateTime.Today
         : DateTime.Parse(currentDateString);
 
-    var yesterday = baseDate.AddDays(-1).ToString("yyyy-MM-dd");
-    var tomorrow = baseDate.AddDays(1).ToString("yyyy-MM-dd");
     var isToday = baseDate.Date == DateTime.Today;
 }
 
@@ -28,7 +26,7 @@
         background-color: #fff;
         border-radius: 1rem;
         box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-        transition: transform 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+        transition: transform 0.2s, box-shadow 0.2s;
         cursor: pointer;
         border: 1px solid #e2e8f0;
     }
@@ -41,12 +39,15 @@
 
     .match-header {
         background: linear-gradient(to right, #3b82f6, #2563eb);
-        padding: 0.75rem 2rem;
+        padding: 0.5rem 1.25rem;
         color: white;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         font-weight: 600;
         border-radius: 0.75rem;
         text-align: center;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
     }
 
     .team-logo {
@@ -101,60 +102,115 @@
     .btn-nav {
         font-weight: 500;
         border-radius: 0.5rem;
+        min-width: 44px;
+        min-height: 44px;
+        font-size: 1.3rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background: #fff;
+        border: 1px solid #e5e7eb;
+        transition: background 0.2s, box-shadow 0.2s;
+    }
+
+        .btn-nav:hover {
+            background: #e0e7ff;
+            box-shadow: 0 2px 8px rgba(59, 130, 246, 0.08);
+        }
+
+    .date-picker {
+        border: none;
+        background: white;
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #1e293b;
+        text-align: center;
+        width: 170px;
+        border-radius: 0.5rem;
+        padding: 0.25rem 0.5rem;
     }
 
     @@media (max-width: 768px) {
-        .match-time
+        .match-time {
+            font-size: 1rem;
+        }
 
-    {
-        font-size: 1rem;
+        .team-logo {
+            width: 50px;
+            height: 50px;
+        }
+
+        .team-name {
+            font-size: 0.95rem;
+        }
+
+        .match-header {
+            font-size: 1rem;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .date-picker {
+            width: 120px;
+            font-size: 1rem;
+        }
     }
 
-    .team-logo {
-        width: 50px;
-        height: 50px;
+    .btn-nav-rounded {
+        width: 44px;
+        height: 44px;
+        border-radius: 50%;
+        background-color: #ffffff;
+        border: 1px solid #3b82f6;
+        color: #3b82f6;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.25rem;
+        transition: 0.2s ease-in-out;
     }
 
-    .team-name {
-        font-size: 0.95rem;
-    }
+        .btn-nav-rounded:hover {
+            background-color: #3b82f6;
+            color: white;
+            box-shadow: 0 2px 10px rgba(59, 130, 246, 0.3);
+        }
 
-    .match-header {
-        font-size: 1rem;
-        padding: 0.5rem 1rem;
-    }
-
-    }
+        .btn-nav-rounded:focus {
+            outline: none;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.3);
+        }
 </style>
 
-
 <div class="container py-5 mb-5">
-    <div class="d-flex justify-content-between align-items-center mb-5">
-        <h2 class="fw-bold text-dark">📅 Match Schedule</h2>
-        @if (User.IsInRole("Admin"))
-        {
-            <div class="admin-actions d-flex gap-2">
-                <a asp-action="Add" class="btn btn-outline-success">
-                    <i class="bi bi-plus-circle me-1"></i> Add Match
-                </a>
-                <a asp-action="Clear" class="btn btn-outline-danger"
-                   onclick="return confirm('Are you sure you want to remove all matches?')">
-                    <i class="bi bi-trash3 me-1"></i> Clear All
-                </a>
-            </div>
-        }
-    </div>
 
-    <div class="d-flex justify-content-center align-items-center mb-5 gap-3">
-        <a asp-action="GetByDate" asp-route-date="@yesterday" class="btn btn-outline-secondary btn-nav">
-            <i class="bi bi-chevron-left me-1"></i> Yesterday
-        </a>
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="admin-actions d-flex gap-2 justify-content-end mb-4">
+            <a asp-action="Add" class="btn btn-outline-success">
+                <i class="bi bi-plus-circle me-1"></i> Add Match
+            </a>
+            <a asp-action="Clear" class="btn btn-outline-danger"
+               onclick="return confirm('Are you sure you want to remove all matches?')">
+                <i class="bi bi-trash3 me-1"></i> Clear All
+            </a>
+        </div>
+    }
+
+    <div class="d-flex justify-content-center align-items-center gap-3 mb-5">
+        <button class="btn-nav-rounded" id="prevDayBtn" title="Previous Day">
+            <i class="bi bi-dash-lg"></i>
+        </button>
+
         <div class="match-header">
             @baseDate.ToString("dddd, MMMM dd, yyyy")
         </div>
-        <a asp-action="GetByDate" asp-route-date="@tomorrow" class="btn btn-outline-secondary btn-nav">
-            Tomorrow <i class="bi bi-chevron-right ms-1"></i>
-        </a>
+
+        <button class="btn-nav-rounded" id="nextDayBtn" title="Next Day">
+            <i class="bi bi-plus-lg"></i>
+        </button>
+
+        <input type="hidden" id="datePicker" value="@baseDate.ToString("yyyy-MM-dd")" />
     </div>
 
     @if (!Model.Any())
@@ -201,8 +257,29 @@
 </div>
 
 @section Scripts {
-    
     <script>
+        // Date navigation logic
+        const datePicker = document.getElementById('datePicker');
+        const prevDayBtn = document.getElementById('prevDayBtn');
+        const nextDayBtn = document.getElementById('nextDayBtn');
+
+        prevDayBtn.addEventListener('click', () => changeDate(-1));
+        nextDayBtn.addEventListener('click', () => changeDate(1));
+        datePicker.addEventListener('change', () => {
+            window.location = `@Url.Action("GetByDate")?date=${datePicker.value}`;
+        });
+
+        function changeDate(delta) {
+            const current = new Date(datePicker.value);
+            current.setDate(current.getDate() + delta);
+            const yyyy = current.getFullYear();
+            const mm = String(current.getMonth() + 1).padStart(2, '0');
+            const dd = String(current.getDate()).padStart(2, '0');
+            const newDate = `${yyyy}-${mm}-${dd}`;
+            window.location = `@Url.Action("GetByDate")?date=${newDate}`;
+        }
+
+        // Countdown logic
         const matches = [
             @foreach (var item in Model)
             {
@@ -217,14 +294,12 @@
             function updateCountdown() {
                 const now = new Date();
                 const diff = match.matchTime - now;
-
                 if (diff <= 0) {
                     el.innerHTML = "<span class='started'>Live!</span>";
                     clearInterval(interval);
                     return;
                 }
-
-                const days = Math.floor(diff / (1000 * 60 * 60 * 60 * 24));
+                const days = Math.floor(diff / (1000 * 60 * 60 * 24));
                 const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
                 const minutes = Math.floor((diff / (1000 * 60)) % 60);
                 const seconds = Math.floor((diff / 1000) % 60);
